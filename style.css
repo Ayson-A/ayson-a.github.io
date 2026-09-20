@@ -60,11 +60,17 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-img, .jumping-vid {
+img {
     display: flex;
     justify-content: center;
     margin: auto;
     width: 20%;
+}
+
+video {
+    display: block;
+    margin: auto;
+    width: 150%;
 }
 
 #profile-pic {
