@@ -60,7 +60,7 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-img {
+img, .jumping-vid {
     display: flex;
     justify-content: center;
     margin: auto;
@@ -72,10 +72,3 @@ img {
     display: block;
     margin: auto;
     width:20%;
-
-.jumping-vid {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    width: 50%;
-}
