@@ -59,3 +59,15 @@
 body {
     font-family: 'Roboto Condensed', sans-serif;
 }
+
+img {
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+
+video {
+    display: block;
+    margin: auto;
+    width: 150%;
+}
