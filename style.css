@@ -60,17 +60,17 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-.profile-pic {
-    float: right;
-    display: block;
-    margin: auto;
-    width:20%;
-
 img {
     display: block;
     margin: auto;
     width: 50%;
 }
+
+#profile-pic {
+    float: right;
+    display: block;
+    margin: auto;
+    width:20%;
 
 video {
     display: block;
