@@ -61,6 +61,7 @@ body {
 }
 
 .profile-pic {
+    float: right;
     display: block;
     margin: auto;
     width:20%;
