@@ -66,6 +66,11 @@ img {
     width: 50%;
 }
 
+.profile-pic {
+    display: block;
+    margin: auto;
+    width:20%;
+
 video {
     display: block;
     margin: auto;
