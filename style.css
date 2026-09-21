@@ -71,6 +71,10 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+p {
+    font-size: 1.25rem;
+}
+
 img {
     display: flex;
     justify-content: center;
