@@ -63,7 +63,8 @@
     
         <p>
             I created the main controller board using perfboard allowing me to solder all the components together on a small compact board. The main star of the show is the ESP32-S3 Sense with its camera board attached to it. This allowed me to 
-            recreate the same experience an attacking operator would have. As the microcontroller is an ESP32, it allowed for seamless wireless communication between the phone and robot. Talk about servo later
+            recreate the same experience an attacking operator would have. As the microcontroller is an ESP32, it allowed for seamless wireless communication between the phone and robot. The main motor that drove the entire gear system was the MG99GR servo motor. 
+            I modded the servo so that it just acted as a motor that can be switched on or off by removing the control board inside the servo and connecting power wires directly to the motors. 
         </p>
     
         <h2>Software</h2>
@@ -75,8 +76,13 @@
         
         <h2>Biggest Problems Faced and How I Solved Them</h2>
         <p>
-            The gear and motor holder kept breaking as it couldn't handle the force of the springs after being released. The main culprit of this problem was the orientation of printing. 
-            Create simple sketch of it. After changing the orientation of the print the full layers were now getting hit, not just the side of multiple layers.
+            The gear and motor holder kept breaking as it couldn't handle the force of the springs after being released. The main culprit of this problem was the orientation of printing.
+        </p>
+
+        <img src=
+
+        <p>
+            After changing the orientation of the print, the area where the full force of the springs was being hit, were now full layers stacked on top of each other, not the layer lines like in the original orientation.
         </p>
     
         <p>
