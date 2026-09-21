@@ -8,6 +8,7 @@
 .wrapper {
     max-inline-size: 1000px;
     max-inline: auto;
+}
 
 .navbar ul{
     list-style-type: none;
