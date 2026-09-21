@@ -66,6 +66,11 @@
     margin: 10px;
 }
 
+.slicers img {
+    width: 120%;
+    height: auto;
+}
+
 .slicers .badgood {
     padding: 10px;
     text-align: center;
