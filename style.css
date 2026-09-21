@@ -65,6 +65,7 @@
 .slicers .badgood {
     padding: 10px;
     text-align: center;
+}
 
 .gallery:hover{
     background-color: hsl(0, 0%, 87%);
