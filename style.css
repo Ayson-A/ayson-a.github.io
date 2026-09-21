@@ -57,6 +57,14 @@
     text-align: center;
 }
 
+.slicers-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .slicers {
     margin: 10px;
     width: 400px;
