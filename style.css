@@ -5,7 +5,7 @@
     justify-content: flex-end;
 }
 
-.wrapper {
+.wrapper{
     max-inline-size: 1000px;
     max-inline: auto;
 }
