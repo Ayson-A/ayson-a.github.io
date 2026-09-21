@@ -60,12 +60,12 @@
 .slicers-container{
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 10px;
 }
 
 .slicers {
     margin: 10px;
-    width: 1600px;
+    width: 3200px;
 }
 
 .slicers .badgood {
