@@ -47,6 +47,12 @@
     width: 400px;
 }
 
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
 .gallery .description{
     padding: 10px;
     text-align: center;
