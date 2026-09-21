@@ -7,7 +7,7 @@
 
 .wrapper{
     max-inline-size: 1000px;
-    max-inline: auto;
+    margin-inline: auto;
 }
 
 .navbar ul{
