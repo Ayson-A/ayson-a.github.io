@@ -85,7 +85,7 @@ video {
 }
 
 #profile-pic {
-    float: right;
+    float: left;
     display: block;
     margin: auto;
     width:50%;
