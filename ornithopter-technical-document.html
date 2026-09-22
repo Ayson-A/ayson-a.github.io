@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>main</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<div class="titlepage">
+<p><span><strong>STM32 Ornithopter Control Board</strong></span><br />
+<span>Technical Design Document</span><br />
+<span>Andrei Ayson</span></p>
+</div>
+<p><span><strong>Bill of Materials</strong></span></p>
+<div id="tab:bom_main">
+<table>
+<caption>Main bill of materials.</caption>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Reference</strong></th>
+<th style="text-align: left;"><strong>Component</strong></th>
+<th style="text-align: left;"><strong>Value / Part</strong></th>
+<th style="text-align: left;"><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Reference</strong></td>
+<td style="text-align: left;"><strong>Component</strong></td>
+<td style="text-align: left;"><strong>Value / Part</strong></td>
+<td style="text-align: left;"><strong>Purpose</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">U1</td>
+<td style="text-align: left;">Microcontroller</td>
+<td style="text-align: left;">STM32F405RGT6</td>
+<td style="text-align: left;">Main controller for RC input reading,
+servo PWM output, USB, and future sensor expansion.</td>
+</tr>
+<tr>
+<td style="text-align: left;">U2</td>
+<td style="text-align: left;">Buck converter</td>
+<td style="text-align: left;">MP2359DJ-LF-Z</td>
+<td style="text-align: left;">Steps the USB or battery input down to the
+3.3 V rail.</td>
+</tr>
+<tr>
+<td style="text-align: left;">U3</td>
+<td style="text-align: left;">USB ESD protection</td>
+<td style="text-align: left;">USBLC6-2SC6</td>
+<td style="text-align: left;">Protects the USB D+ and D- lines.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Q1</td>
+<td style="text-align: left;">P-channel MOSFET</td>
+<td style="text-align: left;">AO3401A</td>
+<td style="text-align: left;">Battery-side high-side switching
+device.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Y1</td>
+<td style="text-align: left;">Crystal</td>
+<td style="text-align: left;">16 MHz</td>
+<td style="text-align: left;">External clock source for the STM32.</td>
+</tr>
+<tr>
+<td style="text-align: left;">L1</td>
+<td style="text-align: left;">Small inductor / ferrite element</td>
+<td style="text-align: left;">39 nH</td>
+<td style="text-align: left;">Filters the analog supply rail going to
+VDDA.</td>
+</tr>
+<tr>
+<td style="text-align: left;">L2</td>
+<td style="text-align: left;">Power inductor</td>
+<td style="text-align: left;">10 μH</td>
+<td style="text-align: left;">Main inductor for the MP2359 buck
+converter.</td>
+</tr>
+<tr>
+<td style="text-align: left;">D1</td>
+<td style="text-align: left;">Status LED</td>
+<td style="text-align: left;">Blue LED</td>
+<td style="text-align: left;">Visual indicator controlled by the
+STM32.</td>
+</tr>
+<tr>
+<td style="text-align: left;">D2</td>
+<td style="text-align: left;">Schottky diode</td>
+<td style="text-align: left;">B5819W</td>
+<td style="text-align: left;">Freewheel diode for the buck
+converter.</td>
+</tr>
+<tr>
+<td style="text-align: left;">D3</td>
+<td style="text-align: left;">Schottky diode</td>
+<td style="text-align: left;">B5819W</td>
+<td style="text-align: left;">Helps isolate the USB 5 V path.</td>
+</tr>
+<tr>
+<td style="text-align: left;">D4</td>
+<td style="text-align: left;">Power LED</td>
+<td style="text-align: left;">Red LED</td>
+<td style="text-align: left;">Indicates that the 3.3 V rail is
+present.</td>
+</tr>
+<tr>
+<td style="text-align: left;">F1</td>
+<td style="text-align: left;">Fuse</td>
+<td style="text-align: left;">250 mA</td>
+<td style="text-align: left;">USB/input path current protection.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FB1</td>
+<td style="text-align: left;">Ferrite bead</td>
+<td style="text-align: left;">600 Ω at 600 MHz</td>
+<td style="text-align: left;">Filters high-frequency noise on the input
+supply path.</td>
+</tr>
+<tr>
+<td style="text-align: left;">SW1</td>
+<td style="text-align: left;">Switch</td>
+<td style="text-align: left;">SPDT switch</td>
+<td style="text-align: left;">BOOT0 configuration switch.</td>
+</tr>
+<tr>
+<td style="text-align: left;">J1</td>
+<td style="text-align: left;">Battery connector</td>
+<td style="text-align: left;">2-pin JST</td>
+<td style="text-align: left;">Main 7.4 V battery input.</td>
+</tr>
+<tr>
+<td style="text-align: left;">J2</td>
+<td style="text-align: left;">Programming header</td>
+<td style="text-align: left;">10-pin SWD</td>
+<td style="text-align: left;">STM32 programming and debugging.</td>
+</tr>
+<tr>
+<td style="text-align: left;">J5</td>
+<td style="text-align: left;">USB connector</td>
+<td style="text-align: left;">Micro-USB</td>
+<td style="text-align: left;">USB data and USB 5 V input.</td>
+</tr>
+<tr>
+<td style="text-align: left;">J7</td>
+<td style="text-align: left;">RC receiver connector</td>
+<td style="text-align: left;">3-pin header</td>
+<td style="text-align: left;">Connects receiver signal, power, and
+ground.</td>
+</tr>
+<tr>
+<td style="text-align: left;">J8, J9</td>
+<td style="text-align: left;">Servo connectors</td>
+<td style="text-align: left;">3-pin headers</td>
+<td style="text-align: left;">Connect servo signal, battery power, and
+ground.</td>
+</tr>
+<tr>
+<td style="text-align: left;">HD0521MG</td>
+<td style="text-align: left;">Coreless digital servo</td>
+<td style="text-align: left;">4.8 V–8.4 V, 333 Hz</td>
+<td style="text-align: left;">Servo actuation for the ornithopter.</td>
+</tr>
+<tr>
+<td style="text-align: left;">RadioLink T8S</td>
+<td style="text-align: left;">RC transmitter</td>
+<td style="text-align: left;">8-channel transmitter</td>
+<td style="text-align: left;">Sends user control commands.</td>
+</tr>
+<tr>
+<td style="text-align: left;">RadioLink R8EF</td>
+<td style="text-align: left;">RC receiver</td>
+<td style="text-align: left;">8-channel receiver</td>
+<td style="text-align: left;">Outputs PWM signal to the STM32 RC
+input.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tab:bom_passives">
+<table>
+<caption>Passive components.</caption>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Reference</strong></th>
+<th style="text-align: left;"><strong>Value</strong></th>
+<th style="text-align: left;"><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Reference</strong></td>
+<td style="text-align: left;"><strong>Value</strong></td>
+<td style="text-align: left;"><strong>Purpose</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">C1, C2</td>
+<td style="text-align: left;">2.2 μF</td>
+<td style="text-align: left;">VCAP capacitors for STM32 internal
+regulator stability.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">4.7 μF</td>
+<td style="text-align: left;">Bulk capacitance on the 3.3 V rail.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C4–C8</td>
+<td style="text-align: left;">100 nF</td>
+<td style="text-align: left;">Local digital supply decoupling for STM32
+VDD pins.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C9</td>
+<td style="text-align: left;">1 μF</td>
+<td style="text-align: left;">Bulk filtering for the STM32 analog supply
+rail.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C10</td>
+<td style="text-align: left;">10 nF</td>
+<td style="text-align: left;">High-frequency filtering for the STM32
+analog supply rail.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C11, C12</td>
+<td style="text-align: left;">10 pF</td>
+<td style="text-align: left;">Load capacitors for the 16 MHz
+crystal.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C13</td>
+<td style="text-align: left;">10 μF</td>
+<td style="text-align: left;">Input capacitor for the MP2359 buck
+converter.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C14</td>
+<td style="text-align: left;">10 nF</td>
+<td style="text-align: left;">Bootstrap capacitor for the MP2359 buck
+converter.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C15, C16</td>
+<td style="text-align: left;">10 μF</td>
+<td style="text-align: left;">Output capacitors for the regulated 3.3 V
+rail.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C17, C21, C23, C24</td>
+<td style="text-align: left;">47 μF</td>
+<td style="text-align: left;">Bulk capacitors near the servo power
+connectors.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C18</td>
+<td style="text-align: left;">10 μF</td>
+<td style="text-align: left;">Bulk capacitor near the RC receiver
+connector.</td>
+</tr>
+<tr>
+<td style="text-align: left;">C19, C20, C22</td>
+<td style="text-align: left;">100 nF</td>
+<td style="text-align: left;">High-frequency decoupling near servo and
+RC connectors.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R1</td>
+<td style="text-align: left;">10 k Ω</td>
+<td style="text-align: left;">BOOT0 configuration resistor.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R2</td>
+<td style="text-align: left;">47 Ω</td>
+<td style="text-align: left;">Series resistor in the crystal
+circuit.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R3</td>
+<td style="text-align: left;">1.5 k Ω</td>
+<td style="text-align: left;">Current-limiting resistor for the blue
+status LED.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R4</td>
+<td style="text-align: left;">100 k Ω</td>
+<td style="text-align: left;">Part of the buck enable/input control
+resistor network.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R5</td>
+<td style="text-align: left;">68 k Ω</td>
+<td style="text-align: left;">Part of the buck enable/input control
+resistor network.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R6</td>
+<td style="text-align: left;">47 k Ω</td>
+<td style="text-align: left;">Top resistor in the MP2359 feedback
+divider.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R7</td>
+<td style="text-align: left;">15 k Ω</td>
+<td style="text-align: left;">Middle resistor in the MP2359 feedback
+divider.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R8</td>
+<td style="text-align: left;">270 Ω</td>
+<td style="text-align: left;">Bottom resistor in the MP2359 feedback
+divider.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R11–R13</td>
+<td style="text-align: left;">470 Ω</td>
+<td style="text-align: left;">Series resistors for servo and RC signal
+lines.</td>
+</tr>
+<tr>
+<td style="text-align: left;">R15</td>
+<td style="text-align: left;">1 k Ω</td>
+<td style="text-align: left;">Current-limiting resistor for the red
+power LED.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span><strong>System Overview</strong></span></p>
+<p>The purpose of this project was to design a custom STM32-based
+control board for a butterfly-inspired ornithopter platform. The board
+handles the electronic control side of the project, including RC
+receiver input, servo PWM output, USB connection, programming access,
+and power regulation.</p>
+<p>The STM32F405RGT6 was selected as the main controller because it has
+enough timer peripherals for RC signal measurement and servo PWM
+generation, while also supporting USB and SWD programming. The
+STM32F405/F407 datasheet lists the device family as using an ARM
+Cortex-M4 core with FPU, operating up to 168 MHz, and including USB
+support, timers, ADCs, and SWD/JTAG debugging <span class="citation"
+data-cites="stm32f405"></span>.</p>
+<p>The board has several main subsystems:</p>
+<ol>
+<li><p>Power input and regulation circuitry.</p></li>
+<li><p>STM32 microcontroller support circuitry.</p></li>
+<li><p>USB interface and ESD protection.</p></li>
+<li><p>SWD programming and debugging connector.</p></li>
+<li><p>RC receiver input.</p></li>
+<li><p>Servo output connectors.</p></li>
+<li><p>PCB layout and physical board integration.</p></li>
+</ol>
+<p>The board can be powered either from USB 5 V or from a 7.4 V battery
+input. The USB input is mainly useful for bench testing, basic board
+bring-up, and firmware development. The battery input is intended for
+normal ornithopter operation, especially when servos are connected and
+drawing current.</p>
+<p>The STM32 itself is not powered directly from USB 5 V or from the
+7.4 V battery. Both power sources feed the input side of the power
+system, and the MP2359 buck converter generates the regulated 3.3 V rail
+used by the STM32.</p>
+<p><span><strong>Ornithopter Platform</strong></span></p>
+<p>The ornithopter body was designed to look and flap more like a
+butterfly rather than a typical fixed-wing aircraft. The physical design
+is included here to show the actual platform that the PCB is being
+designed for. The PCB is the control system, while the body is the
+mechanical system that the electronics are meant to support.</p>
+<figure id="fig:ornithopter_body" data-latex-placement="H">
+<figure id="fig:ornithopter_iso">
+<img src="./Ornithopter_Body2.jpg" />
+<figcaption>Isometric Fusion view.</figcaption>
+</figure>
+<figure id="fig:ornithopter_top">
+<img src="./Ornithopter_Body.jpg" />
+<figcaption>Top Fusion view.</figcaption>
+</figure>
+<figcaption>Butterfly-inspired ornithopter body model.</figcaption>
+</figure>
+<p>The body design gives the project more context as the electronics are
+not meant to be a generic STM32 breakout board. The control board is
+part of a larger mechatronic system where the RC input, servo control,
+power delivery, and physical wing motion all connect together.</p>
+<p><span><strong>Complete Schematic</strong></span></p>
+<p>The general STM32 hardware design process was based heavily on the
+Phil’s Lab STM32 hardware design tutorial <span class="citation"
+data-cites="philslab"></span>, while the final schematic organization,
+connector choices, and PCB layout were modified for the ornithopter
+control board application.</p>
+<p>The full schematic is divided into three major areas: power
+circuitry, STM32 microcontroller circuitry, and connector/USB circuitry.
+The top section contains the power circuitry. The lower left section
+contains the STM32F405RGT6 microcontroller and its support components.
+The lower right section contains the USB connector, ESD protection
+device, SWD connector, RC receiver connector, and servo connectors.</p>
+<figure id="fig:full_schematic" data-latex-placement="H">
+<img src="./fullOrnithopterSchematic.jpg" />
+<figcaption>Full STM32 ornithopter control board schematic.</figcaption>
+</figure>
+<p><span><strong>Power Circuitry</strong></span></p>
+<p>The power circuitry has to support both low-current digital
+electronics and higher-current external devices. The STM32 needs a clean
+3.3 V rail, while the RC receiver and servos can inject noise or pull
+current in pulses. The board was designed so it can be powered from USB
+during bench testing or from a 7.4 V battery during ornithopter
+operation.</p>
+<figure id="fig:power_schematic" data-latex-placement="H">
+<img src="./PowerCircuitry.jpg" />
+<figcaption>Power input and 3.3 V buck regulator circuitry.</figcaption>
+</figure>
+<h2 class="unnumbered" id="input-power-sources">Input Power Sources</h2>
+<p>There are two main input power sources on the board. The first is the
+USB 5 V input from the Micro-USB connector. This is useful for
+programming, firmware testing, and basic board bring-up. The second is
+the 7.4 V battery input through connector J1, which is intended for
+normal ornithopter testing where the servos and receiver are
+powered.</p>
+<p>The <code>+5V</code> label in the schematic refers to the USB VBUS
+rail. It is not the voltage that directly powers the STM32. The STM32 is
+only powered from the regulated 3.3 V rail.</p>
+<p>The battery input is labeled <code>+7.4V</code>. This is the nominal
+voltage of a 2-cell lithium battery. A fully charged 2-cell lithium
+battery can be higher than 7.4 V, so the regulator needs to tolerate
+more than the nominal voltage. The MP2359 is a good fit here because its
+recommended operating input range is 4.5 V to 24 V <span
+class="citation" data-cites="mp2359"></span>.</p>
+<h2 class="unnumbered" id="usb-power-path">USB Power Path</h2>
+<p>The USB connector provides the board with a 5 V VBUS input. This rail
+passes through D3, F1, and FB1 before reaching the buck converter input
+node. D3 is a Schottky diode that helps prevent current from flowing
+backward into the USB port when the board is powered by the battery. F1
+adds basic current protection, and FB1 helps reduce high-frequency noise
+moving along the USB/input power path.</p>
+<p>USB is useful, but it should not be treated like the main flight
+power source. USB is best for programming, debugging, and powering the
+STM32 with light loads. The battery input is the better source when the
+servos are connected and moving.</p>
+<h2 class="unnumbered" id="battery-power-path">Battery Power Path</h2>
+<p>The battery power path enters through J1 and is labeled
+<code>+7.4V</code>. The battery side includes Q1, an AO3401A P-channel
+MOSFET. In this design, Q1 works as a high-side switching device for the
+battery rail. A P-channel MOSFET is useful here because it lets the
+positive rail be switched while keeping the ground reference common
+across the whole board.</p>
+<p>The gate behavior is controlled by the surrounding resistor network.
+When the gate-source voltage becomes negative enough, the P-channel
+MOSFET turns on and allows the battery to feed the board. When the gate
+is pulled closer to the source voltage, the MOSFET turns off.</p>
+<h2 class="unnumbered" id="buck-converter-operation">Buck Converter
+Operation</h2>
+<p>The board uses the MP2359DJ-LF-Z as the 3.3 V switching regulator.
+The MP2359 datasheet describes it as a monolithic step-down converter
+with a built-in power MOSFET, current-mode operation, cycle-by-cycle
+current limiting, thermal shutdown, and a fixed 1.4 MHz switching
+frequency <span class="citation" data-cites="mp2359"></span>. It is also
+listed as supporting a 1.2 A peak output current and being stable with
+low-ESR ceramic output capacitors <span class="citation"
+data-cites="mp2359"></span>.</p>
+<p>A buck converter is used instead of a linear regulator because the
+input can be much higher than 3.3 V. If the board is powered from a
+7.4 V battery, a linear regulator would have to drop about</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7.4</mn><mo>−</mo><mn>3.3</mn><mo>=</mo><mrow><mn>4.1</mn><mspace width="0.222em"></mspace><mi>V</mi></mrow></mrow><annotation encoding="application/x-tex">7.4 - 3.3 = \SI{4.1}{V}</annotation></semantics></math></p>
+<p>as heat. That is wasteful on a small board. The buck converter is
+better because it stores and transfers energy through the inductor
+instead of burning off the voltage difference as heat.</p>
+<h2 class="unnumbered" id="feedback-network">Feedback Network</h2>
+<p>The MP2359 regulates its output using the feedback pin. The datasheet
+gives the typical feedback voltage as 0.810 V <span class="citation"
+data-cites="mp2359"></span>. The feedback divider in this design is made
+from R6, R7, and R8. In a normal feedback divider, the output voltage is
+set by</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>O</mi><mi>U</mi><mi>T</mi></mrow></msub><mo>=</mo><msub><mi>V</mi><mrow><mi>F</mi><mi>B</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mfrac><msub><mi>R</mi><mrow><mi>T</mi><mi>O</mi><mi>P</mi></mrow></msub><msub><mi>R</mi><mrow><mi>B</mi><mi>O</mi><mi>T</mi><mi>T</mi><mi>O</mi><mi>M</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">V_{OUT} = V_{FB}\left(1 + \frac{R_{TOP}}{R_{BOTTOM}}\right)</annotation></semantics></math></p>
+<p>The feedback pin watches the divided-down version of the 3.3 V rail.
+If the feedback voltage is too low, the regulator increases the energy
+delivered to the output. If the feedback voltage is too high, it reduces
+the energy delivered.</p>
+<h2 class="unnumbered" id="inductor-diode-and-capacitors">Inductor,
+Diode, and Capacitors</h2>
+<p>L2 is the 10 μH inductor used by the buck converter. When the MP2359
+switch is on, current increases through the inductor and energy is
+stored in its magnetic field. When the switch turns off, the inductor
+keeps current flowing through D2 and into the output capacitors and
+load. D2 is the external Schottky diode used in the switching path.</p>
+<p>C13 is the input capacitor. It helps keep the regulator input stable
+because the buck converter draws pulsed current. C14 is the bootstrap
+capacitor between the BST and SW nodes. The MP2359 datasheet describes
+the bootstrap capacitor as part of the floating supply used to drive the
+internal power switch gate <span class="citation"
+data-cites="mp2359"></span>. C15 and C16 are output capacitors that
+smooth the 3.3 V rail.</p>
+<h2 class="unnumbered" id="power-led">Power LED</h2>
+<p>D4 and R15 form the 3.3 V power indicator LED. This is useful during
+testing because it gives a quick visual check that the buck converter is
+producing the logic rail.</p>
+<p><span><strong>STM32 Microcontroller Circuitry</strong></span></p>
+<p>The STM32F405RGT6 support circuitry includes the power pins,
+decoupling capacitors, analog supply filtering, VCAP capacitors,
+external crystal, BOOT0 circuit, reset line, USB pins, SWD pins, RC
+input, servo outputs, and status LED.</p>
+<figure id="fig:stm32_schematic" data-latex-placement="H">
+<img src="./STM32_Circuitry.jpg" style="width:88.0%" />
+<figcaption>STM32F405RGT6 support circuitry.</figcaption>
+</figure>
+<h2 class="unnumbered" id="microcontroller-selection">Microcontroller
+Selection</h2>
+<p>The STM32F405RGT6 was selected because it has enough timing
+peripherals and I/O for an RC-controlled robotics board. The
+STM32F405/F407 family includes an ARM Cortex-M4 core with floating point
+support, up to 168 MHz operation, USB support, ADCs, and many timers
+<span class="citation" data-cites="stm32f405"></span>. The timer
+hardware is especially important because the board needs to measure RC
+pulse widths and generate servo PWM signals.</p>
+<p>RC and servo control are timing-based. The board should not rely on
+software delay loops for those signals. Hardware timers make the control
+signals more consistent and leave the CPU free for other tasks later,
+such as stabilization or sensor processing.</p>
+<h2 class="unnumbered" id="pinout-and-peripheral-assignment">Pinout and
+Peripheral Assignment</h2>
+<p>The STM32CubeMX pinout assignment includes the external oscillator
+pins, USB pins, SWD programming pins, status LED output, RC input, and
+servo outputs.</p>
+<figure id="fig:stm32_pinout" data-latex-placement="H">
+<img src="./STM32_Pinout.jpg" style="width:72.0%" />
+<figcaption>STM32CubeMX pinout assignment.</figcaption>
+</figure>
+<div id="tab:pin_assignments">
+<table>
+<caption>Main STM32 pin assignments.</caption>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Signal</strong></th>
+<th style="text-align: center;"><strong>STM32 Pin</strong></th>
+<th style="text-align: center;"><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">HSE_IN</td>
+<td style="text-align: center;">PH0</td>
+<td style="text-align: center;">External crystal input.</td>
+</tr>
+<tr>
+<td style="text-align: center;">HSE_OUT</td>
+<td style="text-align: center;">PH1</td>
+<td style="text-align: center;">External crystal output.</td>
+</tr>
+<tr>
+<td style="text-align: center;">LED_STATUS</td>
+<td style="text-align: center;">PA2</td>
+<td style="text-align: center;">Drives the blue status LED.</td>
+</tr>
+<tr>
+<td style="text-align: center;">RC</td>
+<td style="text-align: center;">PA5</td>
+<td style="text-align: center;">Reads the RC receiver signal.</td>
+</tr>
+<tr>
+<td style="text-align: center;">SERVO_1</td>
+<td style="text-align: center;">PA6</td>
+<td style="text-align: center;">Outputs PWM signal to servo 1.</td>
+</tr>
+<tr>
+<td style="text-align: center;">SERVO_2</td>
+<td style="text-align: center;">PA7</td>
+<td style="text-align: center;">Outputs PWM signal to servo 2.</td>
+</tr>
+<tr>
+<td style="text-align: center;">USB_D-</td>
+<td style="text-align: center;">PA11</td>
+<td style="text-align: center;">USB OTG full-speed differential data
+minus.</td>
+</tr>
+<tr>
+<td style="text-align: center;">USB_D+</td>
+<td style="text-align: center;">PA12</td>
+<td style="text-align: center;">USB OTG full-speed differential data
+plus.</td>
+</tr>
+<tr>
+<td style="text-align: center;">SWDIO</td>
+<td style="text-align: center;">PA13</td>
+<td style="text-align: center;">SWD programming/debug data line.</td>
+</tr>
+<tr>
+<td style="text-align: center;">SWCLK</td>
+<td style="text-align: center;">PA14</td>
+<td style="text-align: center;">SWD programming/debug clock line.</td>
+</tr>
+<tr>
+<td style="text-align: center;">SWO</td>
+<td style="text-align: center;">PB3</td>
+<td style="text-align: center;">Optional serial wire output debug
+signal.</td>
+</tr>
+<tr>
+<td style="text-align: center;">BOOT0</td>
+<td style="text-align: center;">BOOT0</td>
+<td style="text-align: center;">Selects boot mode during reset.</td>
+</tr>
+<tr>
+<td style="text-align: center;">NRST</td>
+<td style="text-align: center;">NRST</td>
+<td style="text-align: center;">Reset input for the STM32.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class="unnumbered" id="supply-voltage">Supply Voltage</h2>
+<p>The STM32F405 uses a 1.8 V to 3.6 V application supply and I/O supply
+range according to the datasheet <span class="citation"
+data-cites="stm32f405"></span>. Because of this, the STM32 cannot be
+powered directly from USB 5 V or from the 7.4 V battery. The MP2359 buck
+converter creates the regulated 3.3 V rail, and that rail powers the
+STM32 VDD pins.</p>
+<p>Using 3.3 V also makes sense because it gives full-speed digital
+operation while staying inside the STM32 supply limit. The 3.3 V rail is
+used for the digital supply pins and the analog supply filtering
+network.</p>
+<h2 class="unnumbered" id="digital-decoupling-capacitors">Digital
+Decoupling Capacitors</h2>
+<p>C4 through C8 are 100 nF decoupling capacitors placed on the 3.3 V
+rail near the STM32 supply pins. These capacitors are there because the
+STM32 current demand changes quickly when internal logic switches. The
+small capacitors provide a local charge source for fast current
+spikes.</p>
+<p>C3 is a 4.7 μF bulk capacitor on the same rail. This helps with
+slower and larger changes in current demand. The small 100 nF capacitors
+handle higher-frequency noise, while the larger capacitor helps
+stabilize the rail overall.</p>
+<h2 class="unnumbered" id="vcap-capacitors">VCAP Capacitors</h2>
+<p>C1 and C2 are both 2.2 μF capacitors connected to the STM32 VCAP
+pins. These pins support the STM32 internal voltage regulator. The
+datasheet states that regulator stabilization is achieved by connecting
+external capacitors to VCAP1 and VCAP2 <span class="citation"
+data-cites="stm32vcap"></span>. These are not general-purpose supply
+outputs and should not be used to power external circuits.</p>
+<p>Leaving out the VCAP capacitors can prevent the STM32 from running
+correctly. In this board, both VCAP pins are given their own 2.2 μF
+capacitor to ground.</p>
+<h2 class="unnumbered" id="analog-supply-filtering">Analog Supply
+Filtering</h2>
+<p>The analog supply rail is labeled <code>+3.3VA</code>. It is created
+from the normal 3.3 V rail through L1 and is filtered with C9 and C10.
+C9 is 1 μF, and C10 is 10 nF. The point of this network is to keep the
+analog supply cleaner than the digital supply.</p>
+<p>Even if the first version of the board is mostly using digital RC and
+servo signals, analog supply filtering is still worth including. It
+keeps the design ready for future analog features like battery voltage
+sensing, current sensing, or other sensor inputs.</p>
+<h2 class="unnumbered" id="external-crystal">External Crystal</h2>
+<p>The board schematic uses Y1 as the external crystal connected to PH0
+and PH1. The STM32 datasheet gives the HSE oscillator frequency range as
+4 MHz to 26 MHz, so 16 MHz is within the supported range <span
+class="citation" data-cites="stm32hse"></span>. C11 and C12 are load
+capacitors connected to ground.</p>
+<p>The crystal load capacitors should be selected based on the crystal
+requirements, while also accounting for board and pin capacitance <span
+class="citation" data-cites="stm32hse"></span>. The crystal should be
+placed close to the STM32 pins because long traces add parasitic
+capacitance and can pick up noise.</p>
+<p>The external crystal is useful because USB timing depends on an
+accurate clock. The STM32 USB full-speed peripheral needs a dedicated
+48 MHz clock generated by a PLL connected to the HSE oscillator <span
+class="citation" data-cites="stm32usb"></span>.</p>
+<h2 class="unnumbered" id="boot0-circuit">BOOT0 Circuit</h2>
+<p>The BOOT0 circuit uses R1 and SW1 to control the STM32 boot mode. In
+normal operation, BOOT0 should be held low so the STM32 boots from user
+flash memory. If BOOT0 is pulled high during reset, the STM32 can enter
+its built-in bootloader mode.</p>
+<p>This is useful during board bring-up because it gives another
+recovery path. If the firmware is broken or the normal programming
+method is being weird, the bootloader mode can help recover the
+chip.</p>
+<h2 class="unnumbered" id="status-led">Status LED</h2>
+<p>D1 and R3 form the blue status LED circuit. The LED is connected to
+the <code>LED_STATUS</code> signal from the STM32. This LED is useful
+during initial bring-up because a blink test can confirm several things
+at once. It shows that the STM32 is receiving power, the clock
+configuration is working, the firmware uploaded successfully, and the
+GPIO pin is operating.</p>
+<p><span><strong>Clock Configuration</strong></span></p>
+<p>The clock configuration matters because the USB peripheral, RC input
+capture, and servo PWM outputs all depend on accurate timing. The clock
+tree was configured in STM32CubeMX using the external high-speed
+oscillator as the PLL source.</p>
+<figure id="fig:clock_config" data-latex-placement="H">
+<img src="./Clock_Configuration.jpg" />
+<figcaption>STM32CubeMX clock tree configuration.</figcaption>
+</figure>
+<p><span><strong>RC Input and Servo Control</strong></span></p>
+<p>The board interfaces with a RadioLink T8S transmitter and R8EF
+receiver system. The receiver provides the command signal to the STM32,
+and the STM32 generates PWM signals for the servos. This lets the
+ornithopter be controlled from a normal RC transmitter while still
+allowing the STM32 to process the signal in firmware.</p>
+<h2 class="unnumbered" id="radiolink-t8s-and-r8ef-receiver">RadioLink
+T8S and R8EF Receiver</h2>
+<p>The RadioLink T8S is an 8-channel remote controller, and the R8EF is
+the matching 8-channel receiver. The receiver can output normal PWM
+signals, and it can also be switched into a mode where it provides SBUS
+and PPM outputs. For this board, the important mode is PWM signal mode
+because the STM32 reads an RC pulse directly through a timer input
+capture pin.</p>
+<p>The R8EF receiver operates from 3 V to 15 V DC and draws about
+38 mA–45 mA at 5 V. The T8S manual lists the PWM output range as 1.0 ms
+to 2.0 ms, with a frame cycle of 15 ms <span class="citation"
+data-cites="radiolink"></span>. This means the receiver sends a
+repeating pulse, and the pulse width represents the joystick
+command.</p>
+<p>The STM32 reads this signal on the pin labeled <code>RC</code>. In
+the CubeMX configuration, this pin is assigned to a timer input capture
+channel. Input capture is useful because the timer hardware can record
+the time when a rising edge occurs. Then the firmware can measure the
+time to the falling edge and calculate the pulse width.</p>
+<p>The pulse width is calculated as</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi>p</mi><mi>u</mi><mi>l</mi><mi>s</mi><mi>e</mi></mrow></msub><mo>=</mo><msub><mi>t</mi><mrow><mi>f</mi><mi>a</mi><mi>l</mi><mi>l</mi><mi>i</mi><mi>n</mi><mi>g</mi></mrow></msub><mo>−</mo><msub><mi>t</mi><mrow><mi>r</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>n</mi><mi>g</mi></mrow></msub></mrow><annotation encoding="application/x-tex">t_{pulse} = t_{falling} - t_{rising}</annotation></semantics></math></p>
+<p>For a typical RC signal,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi>p</mi><mi>u</mi><mi>l</mi><mi>s</mi><mi>e</mi></mrow></msub><mo>≈</mo><mrow><mn>1.0</mn><mspace width="0.222em"></mspace><mrow><mi>m</mi><mi>s</mi></mrow></mrow><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> to </mtext><mspace width="0.333em"></mspace></mrow><mrow><mn>2.0</mn><mspace width="0.222em"></mspace><mrow><mi>m</mi><mi>s</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">t_{pulse} \approx \SI{1.0}{ms} \text{ to } \SI{2.0}{ms}</annotation></semantics></math></p>
+<p>A centered command is normally near</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi>c</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>≈</mo><mrow><mn>1.5</mn><mspace width="0.222em"></mspace><mrow><mi>m</mi><mi>s</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">t_{center} \approx \SI{1.5}{ms}</annotation></semantics></math></p>
+<p>This gives a simple way to convert the RC signal into a normalized
+command:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mfrac><mrow><msub><mi>t</mi><mrow><mi>p</mi><mi>u</mi><mi>l</mi><mi>s</mi><mi>e</mi></mrow></msub><mo>−</mo><mrow><mn>1.5</mn><mspace width="0.222em"></mspace><mrow><mi>m</mi><mi>s</mi></mrow></mrow></mrow><mrow><mn>0.5</mn><mspace width="0.222em"></mspace><mrow><mi>m</mi><mi>s</mi></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">u = \frac{t_{pulse} - \SI{1.5}{ms}}{\SI{0.5}{ms}}</annotation></semantics></math></p>
+<p>A 1.0 ms pulse gives approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">u=-1</annotation></semantics></math>,
+a 1.5 ms pulse gives
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">u=0</annotation></semantics></math>,
+and a 2.0 ms pulse gives
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">u=1</annotation></semantics></math>.</p>
+<h2 class="unnumbered" id="rc-timer-configuration">RC Timer
+Configuration</h2>
+<p>The RC input uses TIM2 in input capture mode. In the CubeMX setup,
+TIM2 Channel 1 is configured for input capture direct mode on the rising
+edge. From the clock configuration, TIM2 is clocked at 84 MHz. The
+prescaler is set to 83, which produces a timer tick of</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>t</mi><mi>i</mi><mi>c</mi><mi>k</mi></mrow></msub><mo>=</mo><mfrac><mrow><mn>84</mn><mspace width="0.222em"></mspace><mrow><mi>M</mi><mi>H</mi><mi>z</mi></mrow></mrow><mrow><mn>83</mn><mo>+</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mi>M</mi><mi>H</mi><mi>z</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">f_{tick} = \frac{\SI{84}{MHz}}{83+1} = \SI{1}{MHz}</annotation></semantics></math></p>
+<p>A 1 MHz timer tick means each count is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>t</mi><mi>i</mi><mi>c</mi><mi>k</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mi>M</mi><mi>H</mi><mi>z</mi></mrow></mrow></mfrac><mo>=</mo><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mtext mathvariant="normal">μ</mtext><mi>s</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">T_{tick} = \frac{1}{\SI{1}{MHz}} = \SI{1}{\micro s}</annotation></semantics></math></p>
+<p>That works well for reading RC pulse widths because the receiver
+pulses are measured in microseconds. A 1500 μs center pulse would
+correspond to about 1500 timer counts.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mrow><mi>p</mi><mi>u</mi><mi>l</mi><mi>s</mi><mi>e</mi></mrow></msub><mo>=</mo><mfrac><msub><mi>t</mi><mrow><mi>p</mi><mi>u</mi><mi>l</mi><mi>s</mi><mi>e</mi></mrow></msub><msub><mi>T</mi><mrow><mi>t</mi><mi>i</mi><mi>c</mi><mi>k</mi></mrow></msub></mfrac></mrow><annotation encoding="application/x-tex">N_{pulse} = \frac{t_{pulse}}{T_{tick}}</annotation></semantics></math></p>
+<p>For example,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mrow><mi>c</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>=</mo><mfrac><mrow><mn>1500</mn><mspace width="0.222em"></mspace><mrow><mtext mathvariant="normal">μ</mtext><mi>s</mi></mrow></mrow><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mtext mathvariant="normal">μ</mtext><mi>s</mi></mrow></mrow></mfrac><mo>=</mo><mn>1500</mn></mrow><annotation encoding="application/x-tex">N_{center} = \frac{\SI{1500}{\micro s}}{\SI{1}{\micro s}} = 1500</annotation></semantics></math></p>
+<h2 class="unnumbered" id="servo-selection">Servo Selection</h2>
+<p>The servos used for the ornithopter are HD0521MG coreless digital
+servos. These servos are useful for this project because they are small,
+lightweight, and designed for higher-voltage operation. The servo
+specification image lists the operating voltage as 4.8 V–8.4 V, which
+makes the board’s 7.4 V servo rail reasonable for this setup.</p>
+<figure id="fig:servo_specs" data-latex-placement="H">
+<img src="./Servo.jpg" style="width:64.0%" />
+<figcaption>HD0521MG coreless servo specifications.</figcaption>
+</figure>
+<p>At 7.4 V, the servo specification lists a stall torque of 5.5 kg cm,
+a speed of 0.08 s/60<sup></sup>, a running current of 56 mA, and a stall
+current of 1.4 A <span class="citation" data-cites="servo"></span>. The
+stall current matters because servos do not always draw their small
+running current. If the wing mechanism jams, loads up, or moves quickly,
+the current can spike much higher.</p>
+<p>This is one of the reasons the board includes local capacitors near
+the servo connectors. The STM32 itself does not need large current, but
+the servos can create sudden current demands. Without local capacitance,
+those current spikes can cause the supply rail to dip, which can
+introduce noise or even reset the microcontroller.</p>
+<h2 class="unnumbered" id="servo-pwm-configuration">Servo PWM
+Configuration</h2>
+<p>The servo outputs use TIM3 Channel 1 and TIM3 Channel 2 in PWM
+generation mode. In the CubeMX setup, the prescaler is set to 83 and the
+auto-reload value is set to 2999. From the clock configuration, TIM3 is
+also clocked at 84 MHz. The timer tick is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>t</mi><mi>i</mi><mi>c</mi><mi>k</mi></mrow></msub><mo>=</mo><mfrac><mrow><mn>84</mn><mspace width="0.222em"></mspace><mrow><mi>M</mi><mi>H</mi><mi>z</mi></mrow></mrow><mrow><mn>83</mn><mo>+</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mi>M</mi><mi>H</mi><mi>z</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">f_{tick} = \frac{\SI{84}{MHz}}{83+1} = \SI{1}{MHz}</annotation></semantics></math></p>
+<p>The PWM period is then</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>P</mi><mi>W</mi><mi>M</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mi>R</mi><mi>R</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><msub><mi>T</mi><mrow><mi>t</mi><mi>i</mi><mi>c</mi><mi>k</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{PWM} = (ARR + 1)T_{tick}</annotation></semantics></math></p>
+<p>Using
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>R</mi><mi>R</mi><mo>=</mo><mn>2999</mn></mrow><annotation encoding="application/x-tex">ARR = 2999</annotation></semantics></math>,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>P</mi><mi>W</mi><mi>M</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mn>2999</mn><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mtext mathvariant="normal">μ</mtext><mi>s</mi></mrow></mrow><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mn>3000</mn><mspace width="0.222em"></mspace><mrow><mtext mathvariant="normal">μ</mtext><mi>s</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">T_{PWM} = (2999 + 1)(\SI{1}{\micro s}) = \SI{3000}{\micro s}</annotation></semantics></math></p>
+<p>So the PWM frequency is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>P</mi><mi>W</mi><mi>M</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><msub><mi>T</mi><mrow><mi>P</mi><mi>W</mi><mi>M</mi></mrow></msub></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><mn>0.003</mn><mspace width="0.222em"></mspace><mi>s</mi></mrow></mfrac><mo>≈</mo><mrow><mn>333</mn><mspace width="0.222em"></mspace><mrow><mi>H</mi><mi>z</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">f_{PWM} = \frac{1}{T_{PWM}} = \frac{1}{\SI{0.003}{s}} \approx \SI{333}{Hz}</annotation></semantics></math></p>
+<p>This matches the servo specification, which lists a working frequency
+of 333 Hz. The pulse value in CubeMX is set to 1520, which corresponds
+to</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mrow><mi>p</mi><mi>u</mi><mi>l</mi><mi>s</mi><mi>e</mi></mrow></msub><mo>=</mo><mn>1520</mn><mo stretchy="false" form="prefix">(</mo><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mtext mathvariant="normal">μ</mtext><mi>s</mi></mrow></mrow><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mn>1520</mn><mspace width="0.222em"></mspace><mrow><mtext mathvariant="normal">μ</mtext><mi>s</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">t_{pulse} = 1520(\SI{1}{\micro s}) = \SI{1520}{\micro s}</annotation></semantics></math></p>
+<p>That is the neutral pulse width listed in the servo
+specification.</p>
+<h2 class="unnumbered" id="servo-power-rail">Servo Power Rail</h2>
+<p>The servos are powered from the 7.4 V rail instead of the STM32 3.3 V
+rail. This is important because the STM32 rail is only meant for logic
+and low-current electronics. The servos need their own higher-voltage
+power rail because they are electromechanical loads.</p>
+<p>The servo signal wire is still driven by the STM32. The signal line
+goes through a 470 Ω series resistor before reaching the connector. This
+resistor helps limit current into or out of the STM32 pin during
+switching, ringing, or wiring mistakes.</p>
+<div id="tab:servo_connector">
+<table>
+<caption>Servo connector electrical connections.</caption>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Servo Pin</strong></th>
+<th style="text-align: center;"><strong>Board Net</strong></th>
+<th style="text-align: center;"><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Signal</td>
+<td style="text-align: center;">SERVO_1 or SERVO_2</td>
+<td style="text-align: center;">PWM command from STM32 through a 470 Ω
+resistor.</td>
+</tr>
+<tr>
+<td style="text-align: center;">Positive</td>
+<td style="text-align: center;">7.4 V rail</td>
+<td style="text-align: center;">Servo power supply.</td>
+</tr>
+<tr>
+<td style="text-align: center;">Ground</td>
+<td style="text-align: center;">GND</td>
+<td style="text-align: center;">Common ground reference.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span><strong>USB, SWD, and Connectors</strong></span></p>
+<p>This section includes the Micro-USB connector, USB ESD protection
+chip, SWD programming header, battery connector, RC receiver connector,
+and servo connectors.</p>
+<figure id="fig:connectors_usb" data-latex-placement="H">
+<img src="./Connectors_and_USB.jpg" />
+<figcaption>USB, SWD, RC, and servo connector circuitry.</figcaption>
+</figure>
+<h2 class="unnumbered" id="usb-data-and-protection">USB Data and
+Protection</h2>
+<p>The Micro-USB connector provides the USB D+ and D- signals. These
+signals pass through U3, the USBLC6-2SC6 ESD protection device, before
+going to the STM32 USB pins. The point of this part is to protect the
+STM32 from electrostatic discharge that can enter through the USB
+cable.</p>
+<p>USB data lines are more sensitive than a normal GPIO signal because
+they are a differential high-speed interface. The data traces should be
+kept short, routed cleanly, and protected near the connector.</p>
+<h2 class="unnumbered" id="swd-header">SWD Header</h2>
+<p>J2 is the SWD programming connector. It exposes <code>SWDIO</code>,
+<code>SWCLK</code>, <code>SWO</code>, <code>NRST</code>, 3.3 V, and
+ground. The STM32 datasheet lists SWD/JTAG as supported debug interfaces
+<span class="citation" data-cites="stm32f405"></span>. This connector
+allows the STM32 to be programmed and debugged even if USB firmware is
+not working yet.</p>
+<p><code>SWDIO</code> and <code>SWCLK</code> are the main
+programming/debugging signals. <code>NRST</code> allows the programmer
+to reset the chip during flashing. <code>SWO</code> is optional, but it
+can be useful for debug output while the firmware is running.</p>
+<h2 class="unnumbered" id="rc-receiver-connector">RC Receiver
+Connector</h2>
+<p>J7 is the RC receiver connector. The RC signal passes through R13, a
+470 Ω series resistor, before reaching the STM32. The resistor helps
+limit current into the STM32 pin if there is signal ringing, accidental
+contention, or some kind of mild mismatch. The R8EF receiver can operate
+from 3 V to 15 V DC, so the receiver is compatible with the board’s
+receiver power connection of 7.4 V <span class="citation"
+data-cites="radiolink"></span>.</p>
+<h2 class="unnumbered" id="servo-connectors">Servo Connectors</h2>
+<p>J8 and J9 are the servo output connectors. The servo signal lines are
+connected through R11 and R12, which are both 470 Ω. These series
+resistors help reduce ringing and give the STM32 pins some protection.
+The servo power pins are tied to the 7.4 V rail, while the signal pins
+are driven by the STM32. The servo connectors also have local capacitors
+nearby. C17, C21, C23, and C24 are 47 μF bulk capacitors, while C19 and
+C22 are 100 nF capacitors.</p>
+<p><span><strong>PCB Layout and 3D Board View</strong></span></p>
+<p>The PCB was designed as a 4-layer board. The layout includes signal
+routing layers, a dedicated ground plane, and a dedicated 3.3 V power
+plane. Using internal planes makes the board cleaner electrically
+because the STM32 and support circuitry have a low-impedance ground
+return and a more stable logic supply rail.</p>
+<figure id="fig:pcb_layout" data-latex-placement="H">
+<img src="./PCBLayout.jpg" />
+<figcaption>PCB layout view.</figcaption>
+</figure>
+<p>The dedicated ground plane is especially useful because it gives
+return current a short and direct path back to the source. This matters
+for the STM32, USB signals, clock circuitry, and switching regulator
+because all of these parts can be affected by noisy or poorly controlled
+return paths. A solid ground plane also helps reduce voltage differences
+across the board and improves overall signal integrity.</p>
+<p>The internal 3.3 V plane distributes the regulated logic supply to
+the STM32 and nearby support components. This helps keep the 3.3 V rail
+more stable than routing it only through thin traces. The local
+decoupling capacitors near the STM32 still matter, but the power plane
+gives the board a stronger supply structure overall. The higher-current
+7.4 V battery and servo paths are routed with wider copper areas and
+traces because the servos can draw much more current than normal GPIO or
+logic signals.</p>
+<figure id="fig:3d_view" data-latex-placement="H">
+<img src="./3DViewer.jpg" style="width:82.0%" />
+<figcaption>3D render of the assembled PCB.</figcaption>
+</figure>
+<p><span><strong>Testing and Bring-Up</strong></span></p>
+<p>The first bring-up step is to power the board and confirm that the
+3.3 V rail is present. The red power LED provides a quick visual check,
+but the rail should still be measured with a multimeter before assuming
+everything is safe.</p>
+<p>After confirming the 3.3 V rail, the next step is programming the
+STM32 through the SWD header. A simple LED blink program can test the
+microcontroller, clock configuration, GPIO output, and programming
+setup. Once the status LED works, the next tests should be USB
+detection, RC receiver pulse reading, and servo PWM output.</p>
+<div id="tab:bringup">
+<table>
+<caption>Basic testing and bring-up checklist.</caption>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Test</strong></th>
+<th style="text-align: left;"><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Check for shorts between power and
+ground</td>
+<td style="text-align: left;">Makes sure the board is not shorted before
+applying power.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Measure 3.3 V rail</td>
+<td style="text-align: left;">Confirms the regulator is producing the
+STM32 logic voltage.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Confirm power LED turns on</td>
+<td style="text-align: left;">Quick visual indication that the 3.3 V
+rail is present.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Program STM32 through SWD</td>
+<td style="text-align: left;">Confirms the SWD header, reset line, and
+programming setup.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blink status LED</td>
+<td style="text-align: left;">Confirms basic firmware execution and GPIO
+output.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Test USB detection</td>
+<td style="text-align: left;">Confirms USB routing and clock
+configuration.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Read RC pulse width</td>
+<td style="text-align: left;">Confirms the RC input pin and timer input
+capture setup.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Output servo PWM</td>
+<td style="text-align: left;">Confirms the servo signal pins and PWM
+timer setup.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Test with servo load</td>
+<td style="text-align: left;">Checks whether servo current spikes
+disturb the power system.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The successful LED blink test is an important early result. It means
+the STM32 is receiving power, the SWD programming path works, and the
+firmware is running. After that, the more specific tests can build on
+the same setup instead of debugging everything at once.</p>
+<p><span><strong>Design Limitations and Future
+Improvements</strong></span></p>
+<p>The current board works as a first version of the ornithopter control
+system, but there are still some upgrades that would make the design
+more capable in a future revision.</p>
+<p>One useful improvement would be adding an inertial measurement unit,
+or IMU. An IMU would allow the STM32 to measure motion data such as
+pitch, roll, and angular velocity. This would make the board more useful
+for actual flight control because the firmware could respond to the
+movement of the ornithopter instead of only sending direct servo
+commands from the RC receiver.</p>
+<p>Another improvement would be battery voltage sensing. A simple
+resistor divider connected to one of the STM32 ADC pins could allow the
+microcontroller to monitor the battery voltage during operation. This
+would be useful because the system is powered from a 7.4 V battery, and
+the STM32 could eventually warn the user or change behavior when the
+battery gets too low.</p>
+<p>A future revision could also include current sensing for the servo
+rail. Since the servos are mechanical loads, their current draw changes
+depending on how much force they need to apply. Measuring servo current
+would make it easier to see how much electrical load the wing mechanism
+creates during movement.</p>
+<p>Overall, the next version of the board would mainly focus on adding
+sensing and feedback. The current design handles power, STM32 control,
+RC input, and servo PWM output, while future additions like an IMU,
+battery monitoring, and current sensing would make the system more
+useful for closed-loop control and flight testing..</p>
+<p><span><strong>Conclusion</strong></span></p>
+<p>This project designed a custom STM32-based control board for a
+butterfly-inspired ornithopter platform. The board includes the
+STM32F405RGT6 microcontroller, USB interface, SWD programming support,
+RC receiver input, servo output connectors, and a buck converter power
+supply.</p>
+<p>The power system allows the board to be powered from either USB 5 V
+or a 7.4 V battery input. The MP2359 buck converter regulates the input
+down to 3.3 V, which is required for the STM32. The STM32 circuitry
+includes the required decoupling capacitors, VCAP capacitors, analog
+supply filtering, external crystal, BOOT0 control, reset access, and
+status LED.</p>
+<p>The RC and servo interface connects the electronics to the actual
+ornithopter system. The R8EF receiver provides a PWM command signal, and
+the STM32 reads that signal using timer input capture. The STM32 then
+generates servo PWM using hardware timers. The servo timer settings were
+selected to produce a 333 Hz PWM frequency with a 1520 μs neutral pulse,
+matching the HD0521MG servo specification.</p>
+<p>Overall, the board provides the basic electrical platform needed to
+control the ornithopter mechanism. The current design is suitable for
+firmware bring-up, RC signal reading, and servo PWM testing. Future
+improvements could include an IMU, battery voltage monitoring, and
+additional power isolation for the servo rail.</p>
+<div class="thebibliography">
+<p><span>9</span></p>
+<p>Phil’s Lab, <em>KiCad STM32 + USB + Buck Converter PCB Design and
+JLCPCB Assembly - Phil’s Lab #11</em>, YouTube video. Available: <a
+href="https://www.youtube.com/watch?v=C7-8nUU6e3E"
+class="uri">https://www.youtube.com/watch?v=C7-8nUU6e3E</a>. This video
+was used as the main design reference for the STM32 hardware setup,
+including the microcontroller support circuitry, USB/SWD setup, buck
+converter design, and PCB layout workflow. The final board was modified
+for the ornithopter application by rearranging components, selecting
+project-specific connectors, and making the layout as compact as
+reasonably possible.</p>
+<p>STMicroelectronics, <em>STM32F405xx and STM32F407xx Datasheet</em>.
+The datasheet lists the STM32F405/F407 family as ARM Cortex-M4
+microcontrollers with up to 168 MHz operation, USB support, timer
+peripherals, SWD/JTAG debugging, and a 1.8 V to 3.6 V application supply
+range.</p>
+<p>STMicroelectronics, <em>STM32F405xx and STM32F407xx Datasheet</em>,
+VCAP external capacitor section. The datasheet states that the VCAP1 and
+VCAP2 pins require external capacitors for internal regulator
+stabilization.</p>
+<p>STMicroelectronics, <em>STM32F405xx and STM32F407xx Datasheet</em>,
+HSE oscillator section. The datasheet lists the HSE oscillator range as
+4 MHz to 26 MHz and discusses selecting external ceramic load capacitors
+based on crystal requirements.</p>
+<p>STMicroelectronics, <em>STM32F405xx and STM32F407xx Datasheet</em>,
+USB OTG full-speed section. The datasheet states that the USB OTG
+full-speed peripheral requires a dedicated 48 MHz clock generated by a
+PLL connected to the HSE oscillator.</p>
+<p>Monolithic Power Systems, <em>MP2359 1.2A, 24V, 1.4MHz Step-Down
+Converter Datasheet</em>. The datasheet describes the MP2359 as a
+monolithic step-down converter with a built-in MOSFET, 1.2 A peak output
+current, 4.5 V to 24 V recommended input range, 1.4 MHz switching
+frequency, 0.810 V typical feedback voltage, cycle-by-cycle current
+limiting, and thermal shutdown.</p>
+<p>RadioLink, <em>T8S(BT) 8-Channel Remote Controller User Manual</em>.
+The manual lists the T8S and R8EF specifications, including 8-channel
+operation, R8EF PWM/SBUS/PPM output modes, R8EF 3 V–15 V operating
+voltage, and 1.0 ms–2.0 ms PWM output range.</p>
+<p>HD0521MG product specification image, <em>Coreless Servo
+HD0521MG</em>. The specification lists 4.8 V–8.4 V operating voltage,
+1520 μs/333 Hz working frequency, 12 g weight, and current/torque values
+at 5.0 V, 6.0 V, 7.4 V, and 8.4 V.</p>
+</div>
+</body>
+</html>
