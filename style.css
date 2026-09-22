@@ -93,6 +93,10 @@ p {
     font-size: 1.25rem;
 }
 
+ol {
+    font-size: 1.25rem;
+}
+
 #about-me-p {
     font-size: 1.75rem;
 }
@@ -115,3 +119,4 @@ video {
     display: block;
     margin: auto;
     width:50%;
+}
