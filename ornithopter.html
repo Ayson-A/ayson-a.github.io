@@ -1,122 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrei Ayson</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
 
-.header{
-    display:flex;
-    justify-content: flex-end;
-}
+<header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="https://github.com/Ayson-A" class="fa-brands fa-github"></a></li>
+            <li><a href="https://www.linkedin.com/in/andrei-ayson/" class="fa-brands fa-square-linkedin"></a></li>
+            <li><a href="./aboutme">About Me</a></li>
+            <li><a href="./">Projects</a></li>
+        </ul>
+    </nav>
+</header>
 
-.wrapper{
-    max-inline-size: 1500px;
-    margin-inline: auto;
-}
+<body>
+    <div class="wrapper">
+        <h1>Ornithopter</h1>
 
-.navbar ul{
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-    overflow: hidden;
-}
+        <h2>Introduction</h2>
+        <p>
+        Prior to this project I always wanted to create some type of flying machine, whether that was a drone, RC plane or any other flying object. For a while I thought I was going to create a really cool smart drone that could autonomously fly, 
+        however as I did more research on it, I found out the cost of building a working one with features like a camera, sensors, AI, machine vision, etc, can get quite expensive. So I turned down the scope of the project into building something that can fly.
+        While I have not fully delivered on this yet, I've created a great electronics base that could be used in real working frame for an ornithopter. The electronics is the star of the project in my eyes, as I designed an STM32 based flight controller and
+        a simple but effective mini motor driver to drive the energy to make something fly.
+        </p>
 
-.navbar a{
-    color: black;
-    text-decoration: none;
-    padding: 15px;
-    display: block;
-    text-align: center;
-}
+        <h2>Electronics</h2>
+    
+        <p>
+        The main star of the show is the STM32 based controller board. To be quite transparent the majority of the board is largely based on <a href="https://www.youtube.com/@PhilsLab">Phil's Lab</a> STM32 board video with a buck convertor found here: 
+        <a href="https://www.youtube.com/watch?v=C7-8nUU6e3E">KiCad STM32 + USB + Buck Converter PCB Design and JLCPCB Assembly</a>. Without this guide I wouldn't have learned how to design PCBs with an STM32, nor how to work with one so big thank you to him. Aside 
+        from that here's some of the major components of this board:
+        </p>
 
-.navbar a:hover{
-    background-color: hsl(0, 0%, 87%);
-}
+        <ol>
+            <li>MCU: STM32F405RGT6 </li>
+            <li>RC Transmitter and Reciever: RadioLink T8S and R8EF</li>
+            <li>Buck converter: MP2359DJ-LF-Z</li>
+            <li>P-channel MOSFET: AO3401A</li>
+            <li>USB ESD protection: USBLC6-2SC6 P</li>
+        </ol>
 
-.navbar li{
-    float: right;
-}
+        <p>
+        Since the electronics part of this project was for my circuit analysis class' final project here is an html version of my techincal document: <a href="ornithopter-technical-document.html">Ornithopter Technical Document</a> if you are more 
+        curious about the details of how the controller board works.        
+        </p>
 
-.gallery-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
+        <img src="images/ornithopter-controller-board.JPG">
+        
+        <h2>Mechanical Prototypes</h2>
+        <p>
+        The first initial mechanical prototype of the ornithopter was a butterfly style ornithopter that used two high-torque servos to control it's wings, the main insipiration for this was from this video 
+        <a href="https://www.youtube.com/watch?v=eLTltRwuGW8">Butterfly Ornithopter</a> There were some issues however, the overall body and electronics together was too heavy to actually fly and I couldn't really implement code to control both 
+        servos because one of the servo pins on the controller board, unfortunately could not communicate with the STM32. Regardless here is a video of it being controlled: 
+        </p> 
 
-.gallery{
-    margin: 10px;
-    width: 400px;
-}
+        <video src="orni-vid1.mp4" controls autoplay muted loop></video>
 
-.about-content {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
+        <p>
+        The next best thing I could come up with was building a traditional RC ornithopter with a single motor. For this I was mainly inspired by the youtuber: <a href="https://www.youtube.com/@3JWings">3JWINGS</a> many of his ornithopter videos 
+        gave me an idea of how to make one, so big thank you to him. In order for this prototype to work I had to create a mini motor driver which simply uses an SMD N-channel MOSFET, diode, and resistor. I soldered this on a perfboard and 
+        cut it out, I learned of this simple yet elegant method from this video: <a href="https://www.youtube.com/watch?v=xW2Nwg_RX84&t=173s">Guide to making TINY Brushed Motor Drivers</a>. Although this version is not as pretty as the first, it did flag way better,
+        here is a video of it flapping:
+        </p>
+        <video src="orni-vid2.mp4" controls autoplay muted loop></video>
 
-.gallery .description{
-    padding: 10px;
-    text-align: center;
-}
+        <h2>Conclusions & Future Work</h2>
 
-.slicers-container{
-    display: flex;
-    align-items: center;
-}
+        <p>
+        Although I didn't make a fully working flying version of an ornithopter, I believe I have a great electronics base for future versions of an ornithopter. Overall, I learned a lot from this project, purely on the electronics alone, and I would still 
+        eventually like to make a fully working version!
+        </p>
 
-.slicers {
-    margin: 10px;
-}
-
-.slicers img {
-    width: 65%;
-    height: auto;
-}
-
-.slicers .badgood {
-    padding: 10px;
-    text-align: center;
-}
-
-.gallery:hover{
-    background-color: hsl(0, 0%, 87%);
-}
-
-.gallery img{
-    width: 100%;
-    height: auto;
-}
-
-body {
-    font-family: 'Roboto Condensed', sans-serif;
-}
-
-p {
-    font-size: 1.25rem;
-}
-
-ol {
-    font-size: 1.25rem;
-}
-
-#about-me-p {
-    font-size: 1.75rem;
-}
-
-img {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    width: 20%;
-}
-
-video {
-    display: block;
-    margin: auto;
-    width: 50%;
-}
-
-#profile-pic {
-    float: right;
-    display: block;
-    margin: auto;
-    width:50%;
-}
+    </div>
+</body>
+</html>
