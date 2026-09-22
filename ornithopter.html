@@ -1,33 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrei Ayson</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css"
-</head>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap');
 
-<header>
-    <nav class="navbar">
-        <ul>
-            <li><a href="https://github.com/Ayson-A" class="fa-brands fa-github"></a></li>
-            <li><a href="https://www.linkedin.com/in/andrei-ayson/" class="fa-brands fa-square-linkedin"></a></li>
-            <li><a href="./aboutme" class="active">About Me</a></li>
-            <li><a href="./">Projects</a></li>
-        </ul>
-    </nav>
-</header>
+.header{
+    display:flex;
+    justify-content: flex-end;
+}
 
-<body>
-    <h1>Ornithopter</h1>
-    <p>
-        Information on ornithopter here. 
-    </p>
+.wrapper{
+    max-inline-size: 1500px;
+    margin-inline: auto;
+}
 
-    <p>
-        More info here.
-    </p>
+.navbar ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
 
-</body>
-</html>
+.navbar a{
+    color: black;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+}
+
+.navbar a:hover{
+    background-color: hsl(0, 0%, 87%);
+}
+
+.navbar li{
+    float: right;
+}
+
+.gallery-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.gallery{
+    margin: 10px;
+    width: 400px;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.gallery .description{
+    padding: 10px;
+    text-align: center;
+}
+
+.slicers-container{
+    display: flex;
+    align-items: center;
+}
+
+.slicers {
+    margin: 10px;
+}
+
+.slicers img {
+    width: 65%;
+    height: auto;
+}
+
+.slicers .badgood {
+    padding: 10px;
+    text-align: center;
+}
+
+.gallery:hover{
+    background-color: hsl(0, 0%, 87%);
+}
+
+.gallery img{
+    width: 100%;
+    height: auto;
+}
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+p {
+    font-size: 1.25rem;
+}
+
+ol {
+    font-size: 1.25rem;
+}
+
+#about-me-p {
+    font-size: 1.75rem;
+}
+
+img {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 20%;
+}
+
+video {
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+
+#profile-pic {
+    float: right;
+    display: block;
+    margin: auto;
+    width:50%;
+}
