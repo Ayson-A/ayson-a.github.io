@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andrei Ayson</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css"
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <header>
@@ -13,21 +13,60 @@
         <ul>
             <li><a href="https://github.com/Ayson-A" class="fa-brands fa-github"></a></li>
             <li><a href="https://www.linkedin.com/in/andrei-ayson/" class="fa-brands fa-square-linkedin"></a></li>
-            <li><a href="./aboutme" class="active">About Me</a></li>
+            <li><a href="./aboutme">About Me</a></li>
             <li><a href="./">Projects</a></li>
         </ul>
     </nav>
 </header>
 
 <body>
-    <h1>Rover</h1>
-    <p>
-        Information on rover here. 
-    </p>
+    <div class="wrapper">
+        <h1>Rover</h1>
+        <h2>Introduction & Inspiration</h2>
+        <p>
+            My first big project. I created this project the summer after my 1st year of community college. I created 
+            it at the time because I was really big into NASA and space after completing the <a href="https://nasa-ncas.org/about/">NASA NCAS</a> program. Essentially it's a 
+            program offered by NASA for community college students and it introduces them to the world of the space industry 
+            and NASA itself, the two main parts are online, but it really inspired me to work on space related stuff for my career. 
+            Being my first big project, I made a lot of mistakes, and honestly I never made it quite work right, regardless I learned 
+            so much from this project, and I'm grateful for attempting it with the skills I had at the time.  
+        </p>
 
-    <p>
-        More information here. 
-    </p>
+        <h2>Mechanical Design</h2>
+        <p>
+            Inspired by NASA's Curiosity and Perseverance Rovers, this rover loosely tries to replicate them. It has 6 motors and 6 wheels, 
+            a camera, and a robotic arm (never quite worked). I designed this using Siemns NX which was cool because a lot of the aerospace 
+            industry uses this CAD software. The overall chassis design is quite simple though, but it was easy to assemble. Here is a screenshot 
+            of the completed 3D design:
+        </p>
 
+        <img src="images/Rover_3D_Model.jpg">
+
+        <p>
+            Some of the bigger issues I faced mecahnically was the design of the wheels. I wanted them to look just like the Mars Rover ones 
+            but it took some time to figure out how to get the curved rims of the wheel, but I managed to figure it out with time. I also spent some time 
+            on the robotic arm, I was using this project as a reference: <a href="https://www.youtube.com/watch?v=cWuJPlkmxCE">Mini Robotic Arm with Arduino</a> 
+            I believe the issues with the robotic arm not working is more of an electrical problem though. I'll explain more later.
+        </p>
+
+        <h2>Electronics</h2>
+        <p>
+            The electronics of this project center around two boards, a regular ESP32 and an ESP32-CAM. The ESP32-CAM is the main communication board it 
+            takes the web app comands, shows off the video feed and communicates to the controller board what motors and servos need to turn on. I made a perfboard 
+            version of this, then I created a PCB, here is the fully assembled PCB:
+        </p>
+
+        <img src="images/Rover_assembled_PCB.jpg" alt="">
+
+        <ol>
+            <li>MCU: ESP32 and ESP32-CAM</li>
+            <li>Pin Expansion: MCP23017</li>
+            <li>Motor Drivers: 3x TB6612FNG</li>
+            <li>Motors: 6x JGA25-370</li>
+            <li>Servos: 4x MS90S </li>
+        </ol>
+        
+        
+    </div>
 </body>
 </html>
