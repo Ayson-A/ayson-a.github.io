@@ -58,6 +58,10 @@
 
         <img src="images/Rover_assembled_PCB.jpg" alt="">
 
+        <p>
+            This is the list of the main electronic components on the PCB: 
+        </p>
+        
         <ol>
             <li>MCU: ESP32 and ESP32-CAM</li>
             <li>Pin Expansion: MCP23017</li>
@@ -67,10 +71,19 @@
         </ol>
 
         <p>
-            While the PCB worked well, I should've added capacitors next to the power pins as I believe that caused the servos to brownout and not turn properly. 
-            I also could've used 
+            While the PCB worked well, I should've added capacitors next to the power pins for the servos as I believe that caused the servos to brownout and not turn properly. 
+            I also could've used a PWM driver board like the PCA9685 to drive them as well.
         </p>
         
+        <h2>Software</h2>
+        <p>
+            The web controller software is run on the ESP32-CAM, this code is a modified version of DroneBot Workshop's <a href="https://www.youtube.com/watch?v=dZjbGpynQJA">ESP32-CAM Robot Car</a>. 
+            The main modifications is the additional communication code for the main controller board with the regular ESP32, and additional sliders for the individual servos. 
+            DroneBot Workshop's codebase was very useful, and helped make this project possible so big thank you to him. Here is a screenshot of the camera feed and controls: 
+        </p>
+
+        <img src="images/RoverUI.jpg" alt="">
+
         
     </div>
 </body>
